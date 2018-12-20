@@ -1,22 +1,17 @@
 package com.ua.dp.notepad.services;
 
 import com.ua.dp.notepad.dao.ContentDAO;
-import com.ua.dp.notepad.dao.ContentDAOFactory;
-import com.ua.dp.notepad.dao.UserDAO;
-import com.ua.dp.notepad.dao.UserDAOFactory;
-import com.ua.dp.notepad.entity.Content;
-import com.ua.dp.notepad.entity.User;
+import com.ua.dp.notepad.dao.DAOFactory;
+import com.ua.dp.notepad.dao.entity.Content;
 
 import java.util.List;
 
 public class NotePadManager {
 
     private ContentDAO dao;
-    private UserDAO userDAO;
 
     public NotePadManager(){
-        dao = ContentDAOFactory.getContentDAO();
-        userDAO = UserDAOFactory.getUserDAO();
+        dao = DAOFactory.getContentDAO();
     }
 
     public Long addContent(Content content){
@@ -39,24 +34,4 @@ public class NotePadManager {
         return dao.findContents();
     }
 
-    public List<User> findUsers(){
-        return userDAO.findUsers();
-    }
-
-
-    public void updateUser(User user){
-        userDAO.updateUser(user);
-    }
-
-    public User getUser(Long userId){
-        return userDAO.getUser(userId);
-    }
-
-    public void deleteUser(Long userId){
-        userDAO.deleteUser(userId);
-    }
-
-    public Long addUser(User user){
-        return userDAO.addUser(user);
-    }
 }

@@ -1,10 +1,6 @@
 package com.ua.dp.notepad.gui;
-import com.ua.dp.notepad.dao.UserDAO;
-import com.ua.dp.notepad.entity.Content;
-import com.ua.dp.notepad.entity.User;
-import com.ua.dp.notepad.services.NotePadManager;
+import com.ua.dp.notepad.dao.entity.Content;
 
-import static com.sun.glass.ui.Cursor.setVisible;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,13 +17,11 @@ public class EditNotePadDialog extends JDialog implements ActionListener {
     private static final int W_B = 120;
     private static final int H_B = 25;
 
-
-    private final JTextPane txt = new JTextPane();
     private Long contactId = null;
-    private Long userId = null;
     private final JTextPane name = new JTextPane();
     private final JTextPane login = new JTextPane();
     private final JTextPane password = new JTextPane();
+    private final JTextPane txt = new JTextPane();
     private boolean save = false;
 
 
@@ -43,12 +37,12 @@ public class EditNotePadDialog extends JDialog implements ActionListener {
         setVisible(true);
     }
 
-    public EditNotePadDialog(Content content, User user) {
+    public EditNotePadDialog(Content content) {
 
         setLayout(null);
         buildFields();
 
-        initFields(content, user);
+        initFields(content);
         buildButtons();
         setModal(true);
         setResizable(false);
@@ -83,24 +77,23 @@ public class EditNotePadDialog extends JDialog implements ActionListener {
         password.setBorder(BorderFactory.createEtchedBorder());
         add(password);
 
-        JLabel lblContentId = new JLabel("URL:");
-        lblContentId.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblContentId.setBounds(new Rectangle(PAD, 4 * H_B + PAD, W_L, H_B));
-        add(lblContentId);
+        JLabel lblContentUrl = new JLabel("URL:");
+        lblContentUrl.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblContentUrl.setBounds(new Rectangle(PAD, 4 * H_B + PAD, W_L, H_B));
+        add(lblContentUrl);
         txt.setBounds(new Rectangle(W_L + 2 * PAD, 4 * H_B + PAD, W_T, H_B));
         txt.setBorder(BorderFactory.createEtchedBorder());
         add(txt);
 
     }
 
-    private void initFields(Content content, User user) {
+    private void initFields(Content content) {
         if (content != null) {
             contactId = content.getContentId();
-            userId = user.getUserId();
-            login.setText(user.getLogin());
-            password.setText(user.getPassword());
+            name.setText(content.getName());
+            login.setText(content.getLogin());
+            password.setText(content.getPassword());
             txt.setText(content.getText());
-            name.setText(user.getName());
         }
     }
 
@@ -136,12 +129,8 @@ public class EditNotePadDialog extends JDialog implements ActionListener {
 
 
     public Content getContent() {
-        Content content = new Content(contactId, userId , txt.getText());
+        Content content = new Content(contactId, name.getText(), login.getText(), password.getText() , txt.getText());
         return content;
     }
 
-    public User getUser() {
-        User user = new User(userId ,login.getText(), password.getText(), name.getText());
-        return user;
-    }
 }

@@ -1,21 +1,18 @@
 package com.ua.dp.notepad.gui;
 
-import com.ua.dp.notepad.entity.Content;
-import com.ua.dp.notepad.entity.User;
+import com.ua.dp.notepad.dao.entity.Content;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class NotePadModel extends AbstractTableModel {
 
-    private static final String[] headers = {"ID","UserID","Name", "Login" , "Password", "URL"};
+    private static final String[] headers = {"ID","Name", "Login" , "Password", "URL"};
 
     private final List<Content> contents;
-    private final List<User> users;
 
-    public NotePadModel(List<Content> contents, List<User> users){
+    public NotePadModel(List<Content> contents){
         this.contents = contents;
-        this.users = users;
     }
 
     @Override
@@ -25,7 +22,7 @@ public class NotePadModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount(){
-        return 6;
+        return 5;
     }
 
     @Override
@@ -36,18 +33,15 @@ public class NotePadModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int row, int col){
         Content content = contents.get(row);
-        User user = users.get(row);
         switch (col){
             case 0:
             return content.getContentId().toString();
             case 1:
-                return user.getUserId().toString();
+                return content.getName();
             case 2:
-                return user.getName();
+                return content.getLogin();
             case 3:
-                return user.getLogin();
-            case 4:
-                return user.getPassword();
+                return content.getPassword();
             default:
                 return content.getText();
         }

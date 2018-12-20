@@ -1,14 +1,12 @@
 package com.ua.dp.notepad.gui;
 
-import com.ua.dp.notepad.entity.Content;
-import com.ua.dp.notepad.entity.User;
+import com.ua.dp.notepad.dao.entity.Content;
 import com.ua.dp.notepad.services.NotePadManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 public class NotePadFrame extends JFrame implements ActionListener {
@@ -95,10 +93,8 @@ public class NotePadFrame extends JFrame implements ActionListener {
 
     private void loadContent() {
         List<Content> contents = notePadManager.findContents();
-        List<User> users = notePadManager.findUsers();
-        NotePadModel npm = new NotePadModel(contents, users);
+        NotePadModel npm = new NotePadModel(contents);
         contentTable.setModel(npm);
-        contentTable.removeColumn(contentTable.getColumnModel().getColumn(0));
         contentTable.removeColumn(contentTable.getColumnModel().getColumn(0));
     }
 
@@ -115,12 +111,9 @@ public class NotePadFrame extends JFrame implements ActionListener {
         if (sr != -1) {
 
             Long id = Long.parseLong(contentTable.getModel().getValueAt(sr, 0).toString());
-            Long userid = Long.parseLong(contentTable.getModel().getValueAt(sr, 1).toString());
-
             Content cnt = notePadManager.getContent(id);
-            User usr = notePadManager.getUser(userid);
 
-            EditNotePadDialog ecd = new EditNotePadDialog(cnt, usr);
+            EditNotePadDialog ecd = new EditNotePadDialog(cnt);
             saveContent(ecd);
         } else {
             JOptionPane.showMessageDialog(this, "Вы должны выделить строку для редактирования");
@@ -134,10 +127,8 @@ public class NotePadFrame extends JFrame implements ActionListener {
         if (sr != -1) {
 
             Long id = Long.parseLong(contentTable.getModel().getValueAt(sr, 0).toString());
-            Long usrid = Long.parseLong(contentTable.getModel().getValueAt(sr, 1).toString());
-
             notePadManager.deleteContent(id);
-            notePadManager.deleteUser(usrid);
+
 
             loadContent();
         } else {
@@ -150,15 +141,12 @@ public class NotePadFrame extends JFrame implements ActionListener {
         if (ecd.isSave()) {
 
             Content cnt = ecd.getContent();
-            User usr = ecd.getUser();
 
             if (cnt.getContentId() != null) {
                 notePadManager.updateContent(cnt);
-                notePadManager.updateUser(usr);
 
             } else {
                 notePadManager.addContent(cnt);
-                notePadManager.addUser(usr);
             }
             loadContent();
         }

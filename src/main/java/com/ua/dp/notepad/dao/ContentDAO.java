@@ -1,6 +1,6 @@
 package com.ua.dp.notepad.dao;
 
-import com.ua.dp.notepad.entity.Content;
+import com.ua.dp.notepad.dao.entity.Content;
 
 import java.util.List;
 
