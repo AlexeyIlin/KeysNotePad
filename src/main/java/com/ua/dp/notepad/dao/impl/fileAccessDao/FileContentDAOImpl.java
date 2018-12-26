@@ -4,30 +4,48 @@ import com.ua.dp.notepad.dao.ContentDAO;
 import com.ua.dp.notepad.dao.entity.Content;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class FileContentDAOImpl  implements ContentDAO{
 
-
-    private final List<Content> contents = new ArrayList<Content>();
+    private List<Content> contents = new ArrayList<Content>();
+    private FileReaderWriter frw = new FileReaderWriter();
 
     @Override
     public Long addContent(Content content){
         Long contentId = generateContentId();
-
-
-
+        content.setContentId(contentId);
+        contents.add(content);
+        frw.writeData(contents);
         return contentId;
     }
 
     @Override
     public void updateContent(Content content){
 
+        for (Iterator<Content> it = contents.iterator(); it.hasNext();){
+            Content cnt = it.next();
+            if (cnt.getContentId().equals(content.getContentId())){
+                cnt.setName(content.getName());
+                cnt.setLogin(content.getLogin());
+                cnt.setPassword(content.getPassword());
+                cnt.setText(content.getText());
+            }
+            frw.writeData(contents);
+        }
+
     }
 
     @Override
     public void deleteContent(Long contentId){
-
+        for(Iterator<Content> it = contents.iterator(); it.hasNext();){
+            Content cnt = it.next();
+            if (cnt.getContentId().equals(contentId)){
+                it.remove();
+            }
+        }
+        frw.writeData(contents);
     }
 
     @Override
@@ -43,6 +61,8 @@ public class FileContentDAOImpl  implements ContentDAO{
 
     @Override
     public List<Content> findContents(){
+        FileReaderWriter frw = new FileReaderWriter();
+        contents = frw.readData();
         return contents;
     }
 

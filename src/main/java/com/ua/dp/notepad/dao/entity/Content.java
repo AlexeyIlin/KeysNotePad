@@ -8,7 +8,11 @@ public class Content {
     private String password;
     private String text;
 
-    public Content(Long contentId, String name, String login, String password,String text ) {
+
+    public Content() {
+    }
+
+    public Content(Long contentId, String name, String login, String password, String text ) {
         this.contentId = contentId;
         this.name = name;
         this.login = login;
