@@ -24,17 +24,14 @@ public class FileContentDAOImpl  implements ContentDAO{
     @Override
     public void updateContent(Content content){
 
-        for (Iterator<Content> it = contents.iterator(); it.hasNext();){
-            Content cnt = it.next();
-            if (cnt.getContentId().equals(content.getContentId())){
-                cnt.setName(content.getName());
-                cnt.setLogin(content.getLogin());
-                cnt.setPassword(content.getPassword());
-                cnt.setText(content.getText());
+        Content oldContent = getContent(content.getContentId());
+            if (oldContent.getContentId().equals(content.getContentId())){
+                oldContent.setName(content.getName());
+                oldContent.setLogin(content.getLogin());
+                oldContent.setPassword(content.getPassword());
+                oldContent.setText(content.getText());
             }
             frw.writeData(contents);
-        }
-
     }
 
     @Override

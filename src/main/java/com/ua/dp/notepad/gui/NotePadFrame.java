@@ -53,7 +53,7 @@ public class NotePadFrame extends JFrame implements ActionListener {
 
         setBounds(100, 200, 800, 400);
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 
         loadContent();
