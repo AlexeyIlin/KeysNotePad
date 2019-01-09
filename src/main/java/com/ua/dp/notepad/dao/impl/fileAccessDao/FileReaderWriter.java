@@ -9,13 +9,13 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 
-public class FileReaderWriter {
+class FileReaderWriter {
 
 
     private CryproGenerator cryproGenerator = new CryproGenerator();
     private  File file = new File("my.data");
 
-    public void writeData(List<Content> contents){
+    void writeData(List<Content> contents){
 
         cryproGenerator.crypt(file, "decrypt");
 
@@ -41,7 +41,7 @@ public class FileReaderWriter {
     }
 
 
-    public List<Content> readData(){
+     List<Content> readData(){
 
         List<Content> contents = new ArrayList<>();
 

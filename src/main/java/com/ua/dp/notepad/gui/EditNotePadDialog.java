@@ -25,7 +25,7 @@ public class EditNotePadDialog extends JDialog implements ActionListener {
     private boolean save = false;
 
 
-    public EditNotePadDialog(){
+    EditNotePadDialog(){
 
         setLayout(null);
         buildFields();
@@ -37,7 +37,7 @@ public class EditNotePadDialog extends JDialog implements ActionListener {
         setVisible(true);
     }
 
-    public EditNotePadDialog(Content content) {
+    EditNotePadDialog(Content content) {
 
         setLayout(null);
         buildFields();
@@ -55,9 +55,9 @@ public class EditNotePadDialog extends JDialog implements ActionListener {
 
         JLabel lblContentName = new JLabel("Name:");
         lblContentName.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblContentName.setBounds(new Rectangle(PAD, 1 * H_B + PAD, W_L, H_B));
+        lblContentName.setBounds(new Rectangle(PAD,  H_B + PAD, W_L, H_B));
         add(lblContentName);
-        name.setBounds(new Rectangle(W_L + 2 * PAD, 1 * H_B + PAD, W_T, H_B));
+        name.setBounds(new Rectangle(W_L + 2 * PAD, H_B + PAD, W_T, H_B));
         name.setBorder(BorderFactory.createEtchedBorder());
         add(name);
 
@@ -123,13 +123,14 @@ public class EditNotePadDialog extends JDialog implements ActionListener {
     }
 
 
-    public boolean isSave() {
+    boolean isSave() {
         return save;
     }
 
 
-    public Content getContent() {
-        Content content = new Content(contactId, name.getText(), login.getText(), password.getText() , txt.getText());
+    Content getContent() {
+        Content content;
+        content = new Content(contactId, name.getText(), login.getText(), password.getText() , txt.getText());
         return content;
     }
 

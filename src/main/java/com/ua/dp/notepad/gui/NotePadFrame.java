@@ -19,7 +19,7 @@ public class NotePadFrame extends JFrame implements ActionListener {
     private final NotePadManager notePadManager = new NotePadManager();
     private final JTable contentTable = new JTable();
 
-    public NotePadFrame(){
+    NotePadFrame(){
         contentTable.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();

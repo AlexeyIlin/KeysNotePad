@@ -1,13 +1,9 @@
 package com.ua.dp.notepad.dao.impl.fileAccessDao.crypro;
 
-import org.apache.commons.codec.binary.Base64;
-
 import javax.crypto.Cipher;
-import javax.crypto.CipherOutputStream;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
