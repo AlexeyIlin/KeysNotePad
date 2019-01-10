@@ -12,10 +12,10 @@ import java.nio.file.Paths;
 
 public class CryproGenerator  {
 
-    private String secretKey = "SuperPass1234567";
+    private String secretKey = " ";
     private String param = "something1234567";
 
-    private SecretKeySpec key = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), "AES");;
+    private SecretKeySpec key = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), "AES");
     private IvParameterSpec ivParams =  new IvParameterSpec(param.getBytes(StandardCharsets.UTF_8));
 
 

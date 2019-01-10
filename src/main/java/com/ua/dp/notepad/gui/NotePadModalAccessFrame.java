@@ -10,7 +10,7 @@ public class NotePadModalAccessFrame extends JFrame implements ActionListener {
 
     private static final String okButton = "OK";
     private static final String cancelButton = "Cancel";
-    private static final String code = "myp";
+    private static final String code = " ";
 
     private final JTextField field = new JTextField(10);
 
@@ -56,12 +56,20 @@ public class NotePadModalAccessFrame extends JFrame implements ActionListener {
 
     private void checkPassword(String fieldText){
 
-        if (code.equals(fieldText))
-             {
-                 setVisible(false);
+        switch (fieldText) {
+            case "":
+                JOptionPane.showMessageDialog(this, "Введите секретное слово");
+
+                break;
+            case code:
+                setVisible(false);
                 NotePadFrame npf = new NotePadFrame();
                 npf.setVisible(true);
-            }
+                break;
+            default:
+                JOptionPane.showMessageDialog(this, "Неверное секретное слово");
+                break;
+        }
     }
 
 }
